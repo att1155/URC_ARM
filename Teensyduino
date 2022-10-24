@@ -36,6 +36,9 @@ Motor J3(670, 860, 360, 1, 15, 3200, 200, 20);
 
 Motor joints[NUM_JOINTS] = {J1, J2, J3};
 
+//Angles
+float a1,a2,a3;
+
 // FUNCTIONS ---------------------------------------------------------------------------
 
 //Function to open / close gripper
@@ -50,7 +53,10 @@ void actuateGripper(int choice){
   }
 }
 
-//Implment angle function here void setAngles(int a1, int a2, int a3)
+//sets position of the arm using angles as input
+void setPos(float a1, float a2, float a3){
+
+}
 
 // SETUP -------------------------------------------------------------------------------
 
@@ -108,7 +114,6 @@ void loop() {
   if (Serial.available()) {
 
     float setSpeed = 0;
-    float setPos = 0; 
 
     // Read command identifier
     Serial.println("P - Postion Set, S - Max Speed, R - Reset Drivers,");
@@ -121,11 +126,15 @@ void loop() {
     switch (cmd) {
       case 'P':
         // Set new command position
-        setPos = Serial.parseFloat();
-        joints[n].setPosition(setPos);
+        Serial.println("Enter first angle");
+        a1 = Serial.parseFloat();
+        Serial.println("Enter second angle");
+        a2 = Serial.parseFloat();
+        Serial.println("Enter third angle");
+        a3 = Serial.parseFloat();
         
-        Serial.print("POSITION: ");
-        Serial.println(setPos);
+        setPos(x, y, z);
+        
         break;
       case 'S':
         // Set new max speed
