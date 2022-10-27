@@ -37,7 +37,7 @@ Motor J3(670, 860, 360, 1, 15, 3200, 200, 20);
 Motor joints[NUM_JOINTS] = {J1, J2, J3};
 
 //Angles
-float a1,a2,a3;
+int a1,a2,a3;
 
 // FUNCTIONS ---------------------------------------------------------------------------
 
@@ -54,10 +54,10 @@ void actuateGripper(int choice){
 }
 
 //sets position of the arm using angles as input
-void setPos(float a1, float a2, float a3){
-  jointd[0].setPosition(a1);
-  jointd[1].setPosition(a2);
-  jointd[3].setPosition(a3);
+void setPos(int ang1, int ang2, int ang3){
+  jointd[0].setPosition(ang1);
+  jointd[1].setPosition(ang2);
+  jointd[2].setPosition(ang3);
 }
 
 // SETUP -------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ void loop() {
         Serial.println("Enter third angle");
         a3 = Serial.parseFloat();
         
-        setPos(x, y, z);
+        setPos(a1, a2, a3);
         
         break;
       case 'S':
