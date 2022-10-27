@@ -55,7 +55,9 @@ void actuateGripper(int choice){
 
 //sets position of the arm using angles as input
 void setPos(float a1, float a2, float a3){
-
+  jointd[0].setPosition(a1);
+  jointd[1].setPosition(a2);
+  jointd[3].setPosition(a3);
 }
 
 // SETUP -------------------------------------------------------------------------------
@@ -119,9 +121,16 @@ void loop() {
     Serial.println("P - Postion Set, S - Max Speed, R - Reset Drivers,");
     Serial.println("Q - Print to Serial, M - Move, H - Homing")
     char cmd = (char) Serial.read();
+    cmd = toUpper(cmd);
+    
+    while(cmd != "P" || cmd != "S" || cmd != "R" || cmd != "Q" || cmd != "M" || cmd != "H"){
+      System.out.println("Please enter a valid command (P, S, R, Q, M, H)");
+      char cmd = (char) Serial.read();
+      cmd = toUpper(cmd);
+    }
 
-    Serial.println("Choose joint [1,2,3]");
-    int n = Serial.parseInt() - 1;
+    //Serial.println("Choose joint [1,2,3]");
+    //int n = Serial.parseInt() - 1;
     
     switch (cmd) {
       case 'P':
